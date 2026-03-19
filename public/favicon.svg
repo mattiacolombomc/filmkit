@@ -1,0 +1,43 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="512" height="512" rx="80" fill="#1c1c1e"/>
+
+  <g transform="translate(256, 256) scale(2.2) translate(-92.5, 0)">
+    <defs>
+      <clipPath id="halfcan">
+        <rect x="0" y="-90" width="60" height="180"/>
+      </clipPath>
+      <clipPath id="filmclip">
+        <polygon points="48,-70 185,-70 145,70 48,70"/>
+      </clipPath>
+      <mask id="film-mask">
+        <rect x="40" y="-80" width="160" height="160" fill="white"/>
+        <rect x="57" y="-65" width="10" height="7" rx="2" fill="black"/>
+        <rect x="85" y="-65" width="10" height="7" rx="2" fill="black"/>
+        <rect x="113" y="-65" width="10" height="7" rx="2" fill="black"/>
+        <rect x="141" y="-65" width="10" height="7" rx="2" fill="black"/>
+        <rect x="169" y="-65" width="10" height="7" rx="2" fill="black"/>
+        <rect x="57" y="58" width="10" height="7" rx="2" fill="black"/>
+        <rect x="85" y="58" width="10" height="7" rx="2" fill="black"/>
+        <rect x="113" y="58" width="10" height="7" rx="2" fill="black"/>
+        <rect x="141" y="58" width="10" height="7" rx="2" fill="black"/>
+        <rect x="169" y="58" width="10" height="7" rx="2" fill="black"/>
+        <rect x="40" y="-53" width="160" height="3" fill="black"/>
+        <rect x="40" y="50" width="160" height="3" fill="black"/>
+      </mask>
+    </defs>
+
+    <g clip-path="url(#filmclip)" mask="url(#film-mask)" style="shape-rendering: crispEdges">
+      <rect x="48" y="-70" width="28" height="140" fill="#5DBB46"/>
+      <rect x="76" y="-70" width="28" height="140" fill="#FCB827"/>
+      <rect x="104" y="-70" width="28" height="140" fill="#F5821F"/>
+      <rect x="132" y="-70" width="28" height="140" fill="#E03A3E"/>
+      <rect x="160" y="-70" width="28" height="140" fill="#009DDC"/>
+    </g>
+
+    <g clip-path="url(#halfcan)">
+      <ellipse cx="0" cy="70" rx="50" ry="12" fill="#2a2a2a"/>
+      <rect x="-50" y="-70" width="100" height="140" fill="#2a2a2a"/>
+      <ellipse cx="0" cy="-70" rx="50" ry="12" fill="#404040"/>
+    </g>
+  </g>
+</svg>

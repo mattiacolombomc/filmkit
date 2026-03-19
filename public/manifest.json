@@ -1,0 +1,16 @@
+{
+  "name": "FilmKit",
+  "short_name": "FilmKit",
+  "description": "Browser-based preset manager and RAW converter for Fujifilm X-series cameras.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0d0d",
+  "theme_color": "#0d0d0d",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
