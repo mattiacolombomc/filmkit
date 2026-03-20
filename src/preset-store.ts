@@ -249,8 +249,17 @@ function contentKey(name: string, values: Readonly<PresetUIValues>): string {
   return name + '\0' + JSON.stringify(values, Object.keys(values).sort())
 }
 
+/** Get the set of local preset names. */
+export function getLocalNames(store: PresetStore): Set<string> {
+  const names = new Set<string>()
+  for (const p of store.presets.values()) {
+    if (p.origin === 'local') names.add(p.name)
+  }
+  return names
+}
+
 /** Check if a local preset with identical name + values already exists. */
-function hasLocalDuplicate(store: PresetStore, name: string, values: Readonly<PresetUIValues>): boolean {
+export function hasLocalDuplicate(store: PresetStore, name: string, values: Readonly<PresetUIValues>): boolean {
   const key = contentKey(name, values)
   for (const p of store.presets.values()) {
     if (p.origin === 'local' && contentKey(p.name, p.values) === key) return true

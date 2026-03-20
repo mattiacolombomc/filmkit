@@ -16,13 +16,14 @@ import {
 import { patchProfile, type ConversionParams } from './profile/d185.ts'
 import { cameraProfileToUIValues, translateUIToPresetProps, PRESET_DEFAULTS, type PresetUIValues } from './profile/preset-translate.ts'
 import { parseTextPreset, FIELD_LABELS } from './parse-text-preset.ts'
+import { encodePresetUrl, decodePresetUrl } from './preset-url.ts'
 import {
   type PresetStore, type WorkingPreset,
   createStoreFromScan, createEmptyStore,
   getUnslottedIds, isAnythingDirty, getDirtySlots, valuesChanged,
   swapSlots, copyToLocal, copyToSlot,
   addLocalPreset, removePreset, saveLocalPresets,
-  setRafPreset,
+  setRafPreset, hasLocalDuplicate, getLocalNames,
 } from './preset-store.ts'
 
 // ==========================================================================
@@ -58,6 +59,9 @@ const resultDownload = $<HTMLAnchorElement>('result-download')
 const previewStatus = $('preview-status')
 const canvasEmpty = $('canvas-empty')
 const canvasEmptyText = $('canvas-empty-text')
+const compareToggle = $('compare-toggle')
+const compareOriginal = $('compare-original')
+const compareConverted = $('compare-converted')
 
 // Needs-render indicator
 const needsRenderText = $('needs-render-text')
@@ -126,6 +130,8 @@ let camera: FujiCamera | null = null
 let rafData: ArrayBuffer | null = null
 let rafFileName = ''
 let resultBlobUrl: string | null = null
+let originalBlobUrl: string | null = null
+let showingOriginal = false
 let lastRenderedSettings: ConversionParams | null = null
 
 // Recent files — FileSystemFileHandles persisted in IndexedDB, thumbnails in localStorage
@@ -261,6 +267,25 @@ function showResult(jpeg: Uint8Array) {
   resultDownload.download = rafFileName.replace(/\.RAF$/i, '') + '_converted.jpg'
   canvasEmpty.hidden = true
   resultPanel.classList.add('visible')
+
+  // Reset toggle to converted view
+  showingOriginal = false
+  compareOriginal.classList.remove('active')
+  compareConverted.classList.add('active')
+}
+
+function setCompareView(original: boolean) {
+  showingOriginal = original
+  compareOriginal.classList.toggle('active', original)
+  compareConverted.classList.toggle('active', !original)
+
+  const url = original ? originalBlobUrl : resultBlobUrl
+  if (url) {
+    resultImg.src = url
+    resultDownload.href = url
+    const base = rafFileName.replace(/\.RAF$/i, '')
+    resultDownload.download = original ? `${base}_original.jpg` : `${base}_converted.jpg`
+  }
 }
 
 // ==========================================================================
@@ -457,6 +482,11 @@ async function doLoadRaf() {
 
   try {
     const jpeg = await camera.loadRaf(data)
+
+    // Cache the original rendering (base profile, no edits) for before/after
+    if (originalBlobUrl) URL.revokeObjectURL(originalBlobUrl)
+    originalBlobUrl = URL.createObjectURL(new Blob([new Uint8Array(jpeg)], { type: 'image/jpeg' }))
+
     showResult(jpeg)
 
     const thumbUrl = await generateThumbnail(jpeg)
@@ -794,11 +824,44 @@ function makePresetActions(): HTMLElement {
   importAnchor.appendChild(importBtn)
   ioRow.appendChild(importAnchor)
 
+  // Export button with dropdown (Download File / Copy Link)
+  const exportAnchor = document.createElement('div')
+  exportAnchor.className = 'import-dropdown-anchor'
+
   const exportBtn = document.createElement('button')
   exportBtn.textContent = 'Export'
+  exportBtn.style.width = '100%'
   exportBtn.disabled = !activeId
-  exportBtn.addEventListener('click', exportPreset)
-  ioRow.appendChild(exportBtn)
+  exportBtn.addEventListener('click', (e) => {
+    e.stopPropagation()
+    const existing = exportAnchor.querySelector('.import-dropdown')
+    if (existing) { existing.remove(); return }
+
+    const dropdown = document.createElement('div')
+    dropdown.className = 'import-dropdown'
+
+    const fileBtn = document.createElement('button')
+    fileBtn.textContent = 'Download File'
+    fileBtn.addEventListener('click', (ev) => { ev.stopPropagation(); dropdown.remove(); exportPreset() })
+    dropdown.appendChild(fileBtn)
+
+    const linkBtn = document.createElement('button')
+    linkBtn.textContent = 'Copy Link'
+    linkBtn.addEventListener('click', (ev) => { ev.stopPropagation(); dropdown.remove(); copyShareLink() })
+    dropdown.appendChild(linkBtn)
+
+    exportAnchor.appendChild(dropdown)
+
+    const dismiss = (ev: MouseEvent) => {
+      if (!exportAnchor.contains(ev.target as Node)) {
+        dropdown.remove()
+        document.removeEventListener('click', dismiss)
+      }
+    }
+    setTimeout(() => document.addEventListener('click', dismiss), 0)
+  })
+  exportAnchor.appendChild(exportBtn)
+  ioRow.appendChild(exportAnchor)
 
   wrap.appendChild(ioRow)
   return wrap
@@ -1036,6 +1099,25 @@ function exportPreset() {
   URL.revokeObjectURL(url)
 }
 
+/** Copy a shareable link for the active preset to clipboard. */
+function copyShareLink() {
+  if (!activeId) return
+  const wc = workingCopies.get(activeId)
+  const preset = store.presets.get(activeId)
+  const name = presetBarName.value || (wc?.name ?? preset?.name ?? 'Untitled')
+  const values = wc?.values ?? preset?.values
+  if (!values) return
+
+  const encoded = encodePresetUrl(name, values)
+  const url = `${location.origin}${location.pathname}#preset=${encoded}`
+  navigator.clipboard.writeText(url).then(() => {
+    log(`Link copied for "${name}"`)
+    showDialog('Link Copied', `Shareable link for "${name}" copied to clipboard.`, [{ label: 'OK', primary: true }])
+  }).catch(() => {
+    log('Failed to copy link to clipboard')
+  })
+}
+
 /**
  * Import a parsed JSON object as a local preset.
  * Returns the preset name on success, or an error string on failure.
@@ -1079,6 +1161,8 @@ async function importFromFile() {
       const result = importFromJSON(data, file.name.replace(/\.(filmkit|json)$/i, ''))
       if ('error' in result) {
         await showDialog('Import Error', result.error, [{ label: 'OK', primary: true }])
+      } else {
+        await showDialog('Preset Imported', `"${result.name}" has been added to your local presets.`, [{ label: 'OK', primary: true }])
       }
     } catch {
       await showDialog('Import Error', 'Failed to parse file. Expected a .filmkit or .json preset file.', [{ label: 'OK', primary: true }])
@@ -1512,6 +1596,8 @@ function resetApp() {
 
   // Clear UI
   if (resultBlobUrl) { URL.revokeObjectURL(resultBlobUrl); resultBlobUrl = null }
+  if (originalBlobUrl) { URL.revokeObjectURL(originalBlobUrl); originalBlobUrl = null }
+  showingOriginal = false
   resultPanel.classList.remove('visible')
   canvasEmpty.hidden = false
   lastRenderedSettings = null
@@ -1712,6 +1798,9 @@ btnClearLog.addEventListener('click', () => {
   logEl.innerHTML = ''
 })
 
+// Before/after compare toggle
+compareToggle.addEventListener('click', () => setCompareView(!showingOriginal))
+
 // Current file handle — needed for addToRecent
 let currentFileHandle: FileSystemFileHandle | null = null
 
@@ -1774,6 +1863,53 @@ loadRecentFromStorage().then(files => {
   recentFiles = files
   renderRecentFiles()
 })
+
+// Import preset from URL hash (#preset=...)
+function importFromUrlHash() {
+  const hash = location.hash
+  if (!hash.startsWith('#preset=')) return
+
+  const encoded = hash.slice('#preset='.length)
+  const decoded = decodePresetUrl(encoded)
+  if (!decoded) {
+    log('Invalid preset link')
+    return
+  }
+
+  // Clean URL
+  history.replaceState(null, '', location.pathname + location.search)
+
+  const { values } = decoded
+  let { name } = decoded
+
+  // Dedup: same name + same values → skip, select existing
+  if (hasLocalDuplicate(store, name, values)) {
+    for (const p of store.presets.values()) {
+      if (p.origin === 'local' && p.name === name && !valuesChanged(p.values, values)) {
+        selectPreset(p.id)
+        break
+      }
+    }
+    showDialog('Already Exists', `"${name}" is already in your local presets.`, [{ label: 'OK', primary: true }])
+    return
+  }
+
+  // Same name but different values → append (1), (2), etc.
+  const localNames = getLocalNames(store)
+  if (localNames.has(name)) {
+    let n = 1
+    while (localNames.has(`${name} (${n})`)) n++
+    name = `${name} (${n})`
+  }
+
+  const id = addLocalPreset(store, name, values)
+  flushSaveLocal()
+  renderPresetList()
+  selectPreset(id)
+  log(`Imported preset from link: "${name}"`)
+  showDialog('Preset Imported', `"${name}" has been added to your local presets.`, [{ label: 'OK', primary: true }])
+}
+importFromUrlHash()
 
 log('FilmKit ready. Connect your camera to begin.')
 

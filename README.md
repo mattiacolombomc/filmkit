@@ -22,11 +22,13 @@ Just like [Fujifilm X RAW STUDIO](https://www.fujifilm-x.com/global/products/sof
 - **Local Preset Library** - Save presets in your computer, drag & drop between camera and local storage.
 - **RAW Conversion and Live Preview** - Select a RAF file, adjust film simulation parameters, and get back a full-quality JPEG processed by the camera.
 - **Preset Detection** - Loading a RAF file automatically detects which preset was used to shoot it (temporary profile created if not present).
+- **Preset import/export** - Import or export presets as file, link or text paste.
+- **Quick compare** - QUickly compare between original and current preset.
 - Zero installation and cross-platform (supports Linux).
 
 ## Requirements
 
-**Chromium browser**: WebUSB is Chromium-only on desktop.
+**Chromium-based browser** like Google Chrome: WebUSB is Chromium-only on desktop.
 
 Appropriate udev rule required if Chromium is running in Flatpak, ex:
 
@@ -55,7 +57,7 @@ The camera's native d185 profile format (625 bytes) uses different field indices
 
 ## Supporting New Cameras
 
-FilmKit has only been tested on the **Fujifilm X100VI**. If you have a different Fuji X-series camera and want to help expand support, you can capture USB traffic with Wireshark:
+FilmKit has only been tested on the **X100VI**. If you have a different Fuji X-series camera and want to help expand support, you can capture USB traffic with Wireshark:
 
 ### How to capture
 
@@ -88,6 +90,13 @@ This project does **not** accept any pull requests.
 - Bug reports via [Issues](https://github.com/eggricesoy/filmkit/issues)
 - Feature requests via [Issues](https://github.com/eggricesoy/filmkit/issues)
 - Camera compatibility reports with Wireshark captures (see [Supporting New Cameras](#supporting-new-cameras))
+
+### Bug Reports
+
+When filing a bug report, please include:
+1. Your camera model and firmware version
+2. Steps to reproduce the issue
+3. The **debug log** - scroll down to the Debug section at the bottom of the right sidebar, click **Copy Log**, and paste it into the issue
 
 ---
 

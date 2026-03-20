@@ -163,6 +163,31 @@
     }
     .result-bar a { text-decoration: none; }
 
+    .compare-toggle {
+      display: flex;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 0.15rem;
+      gap: 0;
+      cursor: pointer;
+      user-select: none;
+    }
+    .compare-toggle-option {
+      font-family: var(--mono);
+      font-size: var(--mono-s);
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.5rem;
+      border-radius: 100px;
+      color: var(--text-muted);
+      transition: all 0.15s;
+    }
+    .compare-toggle-option.active {
+      background: var(--surface-raised);
+      color: var(--text);
+    }
+
     .preview-overlay {
       position: absolute;
       inset: 0;
@@ -1314,6 +1339,10 @@
       <div id="result-panel">
         <img id="result-img" class="result-image" alt="Converted JPEG">
         <div class="result-bar">
+          <div class="compare-toggle" id="compare-toggle">
+            <span class="compare-toggle-option" id="compare-original">Original</span>
+            <span class="compare-toggle-option active" id="compare-converted">Converted</span>
+          </div>
           <span id="result-info" class="result-info"></span>
           <a id="result-download" download="converted.jpg">
             <button>Save</button>
