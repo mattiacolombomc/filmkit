@@ -6,17 +6,27 @@
 
 # FilmKit
 
-Browser-based preset manager and RAW converter for Fujifilm X-series cameras.
+Browser-based preset manager and RAW converter for Fujifilm X-series cameras for desktop and mobile.
 
-> Note that the app is in **BETA**. It's currently tested on **X100VI** only. It likely works with other X-series cameras that support Fujifilm's RAW conversion protocol (X-T5, X-H2, X-T30, etc.), but this has not been verified. If you have a different camera and want to help, see [Supporting New Cameras](#supporting-new-cameras) below.
-
-![Screenshot](preview.png)
+<p align="center">
+  <img src="screenshots/desktop.png" width="80%"/>
+  <br>
+  Desktop
+  <br><br>
+  <img src="screenshots/mobile-preview.jpg" width="20%"/>
+  <img src="screenshots/mobile-presets.jpg" width="20%"/>
+  <img src="screenshots/mobile-controls.jpg" width="20%"/>
+  <br>
+  Android
+</p>
 
 _This is author's cat. Shoutout to [Fuji X Weekly](https://fujixweekly.com/) for awesome presets!_
 
 ## Features
 
-Just like [Fujifilm X RAW STUDIO](https://www.fujifilm-x.com/global/products/software/x-raw-studio/), FilmKit uses WebUSB to connect directly to your camera, your camera's own image processor handles the conversion.
+> Note that the app is in **BETA**. It's currently tested on **X100VI** only. It likely works with other X-series cameras that support Fujifilm's RAW conversion protocol (X-T5, X-H2, X-T30, etc.), but this has not been verified. If you have a different camera and want to help, see [Supporting New Cameras](#supporting-new-cameras) below.
+
+Just like [Fujifilm X RAW STUDIO](https://www.fujifilm-x.com/global/products/software/x-raw-studio/), FilmKit uses WebUSB to connect directly to your camera, your camera's own image processor handles the conversion. FilmKit is a static client-side app, hosted on Github Pages.
 
 - **Camera Preset Management** - Read, edit and write custom presets on your camera. The iteration should be significantly faster than X RAW STUDIO, thanks to better camera work queue management, non-locking UI and auto-conversion toggle.
 - **Local Preset Library** - Save presets in your computer, drag & drop between camera and local storage.
@@ -24,13 +34,14 @@ Just like [Fujifilm X RAW STUDIO](https://www.fujifilm-x.com/global/products/sof
 - **Preset Detection** - Loading a RAF file automatically detects which preset was used to shoot it (temporary profile created if not present).
 - **Preset import/export** - Import or export presets as file, link or text paste.
 - **Quick compare** - QUickly compare between original and current preset.
+- **Mobile support** - Easily manage presets on-the-go using your phone.
 - Zero installation and cross-platform (supports Linux).
 
 ## Requirements
 
-**Chromium-based browser** like Google Chrome: WebUSB is Chromium-only on desktop.
+**Browser that supports WebUSB**, this includes Chromium-based browswer like Google Chrome on desktop and Android.
 
-Appropriate udev rule required if Chromium is running in Flatpak, ex:
+Appropriate udev rule required if the browser is running in Flatpak, ex:
 
 ```
 SUBSYSTEM=="usb", ATTR{idVendor}=="04cb", MODE="0666"
