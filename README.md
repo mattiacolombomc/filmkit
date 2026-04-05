@@ -1,114 +1,73 @@
-<p align="center">
-  <img src="public/favicon.svg" width="256"/>
-  <br><br>
-  <strong><a href="https://filmkit.eggrice.soy">filmkit.eggrice.soy</a></strong>
-</p>
+# Fuji Recipes Editor
 
-# FilmKit
+Custom settings (C1–C7) per la mia **Fujifilm X100VI**, gestiti tramite [FilmKit](https://github.com/eggricesoy/filmkit).
 
-Browser-based preset manager and RAW converter for Fujifilm X-series cameras for desktop and mobile.
+## Setup attuale (aprile 2025)
 
-<p align="center">
-  <img src="screenshots/desktop.png" width="80%"/>
-  <br>
-  Desktop
-  <br><br>
-  <img src="screenshots/mobile-preview.jpg" width="20%"/>
-  <img src="screenshots/mobile-presets.jpg" width="20%"/>
-  <img src="screenshots/mobile-controls.jpg" width="20%"/>
-  <br>
-  Android
-</p>
+| Slot | Nome | Film Sim | DR | Grain | CC | CCFxB | Skin | WB | R | B | H | S | Color | Sharp | NR | Clarity | Note |
+|------|------|----------|----|-------|----|-------|------|----|---|---|---|---|-------|-------|----|---------|------|
+| **C1** | Reggie's Superia | Classic Neg. | Auto | Strong/Large | Strong | Strong | Off | Auto | +1 | -3 | -2 | -1 | +1 | -2 | -4 | 0 | |
+| **C2** | Last Summer Roll | Classic Neg. | DR400 | Weak/Small | Strong | Weak | Weak | Auto | +3 | -5 | -2 | +0.5 | +4 | 0 | -4 | 0 | ISO 640–1600 |
+| **C3** | Reggie's Portra | Classic Chrome | Auto | Weak/Small | Strong | Weak | Off | Auto | +2 | -4 | -1 | -1 | +2 | -2 | -4 | 0 | |
+| **C4** | Portra 400 | Classic Chrome | DR400 | Strong/Small | Strong | Off | Off | 5200K | +1 | -6 | 0 | -2 | +2 | -2 | -4 | -2 | |
+| **C5** | Reggie's BW | Acros + Red | Auto | Strong/Small | Off | Off | Off | Auto | 0 | 0 | +2 | +2 | +4 | -1 | -4 | 0 | |
+| **C6** | Kodachrome 64 | Classic Chrome | DR200 | Weak/Small | Strong | Weak | Off | Daylight | +2 | -5 | 0 | 0 | +2 | +1 | -4 | +3 | |
+| **C7** | CineStill 800T | Eterna | DR100 | Strong/Large | Strong | Weak | Off | Fluor. 3 | -6 | -4 | 0 | +2 | +4 | -3 | -4 | -5 | |
 
-_This is author's cat. Shoutout to [Fuji X Weekly](https://fujixweekly.com/) for awesome presets!_
+### Impostazioni globali
 
-## Features
+- Shutter Type: Mechanical + Electronic
+- Exposure Compensation: 0
+- ISO: Auto (C2: 640–1600)
+- Display: Histogram ON
 
-> Note that the app is in **BETA**. It's currently tested on **X100VI** only. It likely works with other X-series cameras that support Fujifilm's RAW conversion protocol (X-T5, X-H2, X-T30, etc.), but this has not been verified. If you have a different camera and want to help, see [Supporting New Cameras](#supporting-new-cameras) below.
+## Setup precedente
 
-Just like [Fujifilm X RAW STUDIO](https://www.fujifilm-x.com/global/products/software/x-raw-studio/), FilmKit uses WebUSB to connect directly to your camera, your camera's own image processor handles the conversion. FilmKit is a static client-side app, hosted on Github Pages.
+| Slot | Nome | Film Sim | DR | Grain | CC | CCFxB | WB | R | B | H | S | Color | Sharp | NR | Clarity |
+|------|------|----------|----|-------|----|-------|----|---|---|---|---|-------|-------|----|---------|
+| C1 | Portra 160 | Classic Chrome | Auto | Weak/Small | Weak | Weak | Daylight | +4 | -5 | -2 | -1 | 0 | -1 | -4 | -2 |
+| C2 | Bright Kodak | Classic Chrome | DR400 | Strong/Large | Off | Off | Daylight | +3 | -7 | -2 | -2 | +4 | -2 | -4 | -3 |
+| C3 | Classic Cuban | Classic Chrome | Auto | Strong/Large | Weak | Weak | Auto | +1 | -5 | +1 | +1 | +4 | 0 | -4 | +3 |
+| C4 | Portra 400 | Classic Chrome | DR400 | Strong/Small | Strong | Off | 5200K | +1 | -6 | 0 | -2 | +2 | -2 | -4 | -2 |
+| C5 | Reggie's BW | Acros + Red | Auto | Strong/Small | Off | Off | Auto | 0 | 0 | +2 | +2 | +4 | -1 | -4 | 0 |
+| C6 | Ultramax 400 | Classic Chrome | Auto | Strong/Large | Weak | Weak | Auto | +1 | -5 | +1 | +1 | +4 | 0 | -4 | +3 |
+| C7 | CineStill 800T | Eterna | DR100 | Strong/Large | Strong | Weak | Fluor. 3 | -6 | -4 | 0 | +2 | +4 | -3 | -4 | -5 |
 
-- **Camera Preset Management** - Read, edit and write custom presets on your camera. The iteration should be significantly faster than X RAW STUDIO, thanks to better camera work queue management, non-locking UI and auto-conversion toggle.
-- **Local Preset Library** - Save presets in your computer, drag & drop between camera and local storage.
-- **RAW Conversion and Live Preview** - Select a RAF file, adjust film simulation parameters, and get back a full-quality JPEG processed by the camera.
-- **Preset Detection** - Loading a RAF file automatically detects which preset was used to shoot it (temporary profile created if not present).
-- **Preset import/export** - Import or export presets as file, link or text paste.
-- **Quick compare** - QUickly compare between original and current preset.
-- **Mobile support** - Easily manage presets on-the-go using your phone.
-- Zero installation and cross-platform (supports Linux).
+### Modifiche rispetto al vecchio setup
 
-## Requirements
+- **C1**: Portra 160 → **Reggie's Superia** (Classic Neg., toni più morbidi, CC/CCFxB Strong)
+- **C2**: Bright Kodak → **Last Summer Roll** (Classic Neg., grana ridotta, colori saturi, ISO limitato)
+- **C3**: Classic Cuban → **Reggie's Portra** (era caricata con film sim sbagliata — ora CC corretto con toni rivisti)
+- **C6**: Ultramax 400 → **Kodachrome 64** (DR200, Clarity +3, Sharp +1 — più definito e contrastato)
+- C4, C5, C7: **invariati**
 
-**Browser that supports WebUSB**, this includes Chromium-based browswer like Google Chrome on desktop and Android.
-
-Appropriate udev rule required if the browser is running in Flatpak, ex:
+## Struttura file
 
 ```
-SUBSYSTEM=="usb", ATTR{idVendor}=="04cb", MODE="0666"
+recipes/
+├── REGGIES SUPERIA.filmkit    # C1 — nuova
+├── LAST SUMMER ROLL.filmkit   # C2 — nuova
+├── REGGIES PORTRA.filmkit     # C3 — nuova
+├── KODACHROME 64.filmkit      # C6 — nuova
+└── imported/                  # Vecchie recipe esportate dalla fotocamera
+    ├── PORTRA160.filmkit
+    ├── BRIGHTKODAK.filmkit
+    ├── CLASSIC CUBAN.filmkit
+    ├── PORTRA400.filmkit
+    ├── REGGIES BW.filmkit
+    ├── ULTRAMAX 400.filmkit
+    └── CINESTILL 800T.filmkit
 ```
 
-## How It Works
+I file `.filmkit` sono JSON importabili direttamente in [FilmKit](https://filmkit.eggrice.soy).
 
-FilmKit communicates **PTP (Picture Transfer Protocol)** over USB, the same protocol that X RAW STUDIO uses. The camera does all the heavy lifting: it receives the RAF file and conversion parameters, processes them, and returns a JPEG.
+## Tool
 
-For preset management, FilmKit reads and writes individual preset properties (D18E–D1A5) using standard PTP `GetDevicePropValue` / `SetDevicePropValue` operations.
+Questo repo contiene una copia di [FilmKit](https://github.com/eggricesoy/filmkit) — browser-based preset manager e RAW converter per fotocamere Fujifilm X-series via WebUSB.
 
-See [QUICK_REFERENCE.md](QUICK_REFERENCE.md) for full protocol documentation.
+```bash
+npm install
+npm run dev
+```
 
-## Reverse Engineering
-
-FilmKit's protocol implementation was built with the following reference materials:
-
-- **[rawji](https://github.com/pinpox/rawji)**
-- **[fudge](https://github.com/petabyt/fudge)**
-- **[libgphoto2](http://www.gphoto.org/)**
-- **Wireshark USB captures**: communication between X100VI and X RAW Studio were captured using Wireshark (on Windows with USB capture) to reverse-engineer preset property encoding, write ordering, and conditional write behavior (ex. HighIsoNR uses a proprietary non-linear encoding, Color Temperature can only be written when WB mode is set to Color Temp, monochrome film simulations reject Color writes).
-
-The camera's native d185 profile format (625 bytes) uses different field indices and encoding from the format in RAF files. FilmKit uses a patch-based approach: copy the base profile byte-for-byte, only overwrite fields the user changed, to preserve EXIF sentinel values.
-
-## Supporting New Cameras
-
-FilmKit has only been tested on the **X100VI**. If you have a different Fuji X-series camera and want to help expand support, you can capture USB traffic with Wireshark:
-
-### How to capture
-
-1. Install [Wireshark](https://www.wireshark.org/) with USBPcap (or equivalent for macOS)
-2. Open Wireshark and start capturing on the USB bus your camera is connected to (ex. `USBPcap1:\\.\USBPcap1`)
-3. Open Fujifilm X RAW Studio, and perform one of the following actions you want to capture:
-   - **Profile read**: Just connect and let the app read the camera state
-   - **Preset save**: Change all preset values and save it to one of the profile slots
-   - **RAW conversion**: Load a RAF and convert with one of the presets (local or on-camera)
-4. Stop the capture and save as `.pcapng`
-5. Repeat from 3 for another action.
-
-Filter Wireshark with `usb.transfer_type == 0x02` (bulk transfers) to see only PTP traffic.
-
-### What to share
-
-Open an issue on GitHub with:
-- Your camera model and firmware version
-- What you captured (please capture all three)
-- The `.pcapng` files
-- The parameter values you used (so we can correlate bytes to settings)
-
-Additional captures may be required with various property values (ex. for ranged-based value, typically preset save or profile read of min/max values are good enough, but we may face another case of HighIsoNR weirdness).
-
-## Contributing
-
-This project does **not** accept any pull requests.
-
-**What is welcome:**
-- Bug reports via [Issues](https://github.com/eggricesoy/filmkit/issues)
-- Feature requests via [Issues](https://github.com/eggricesoy/filmkit/issues)
-- Camera compatibility reports with Wireshark captures (see [Supporting New Cameras](#supporting-new-cameras))
-
-### Bug Reports
-
-When filing a bug report, please include:
-1. Your camera model and firmware version
-2. Steps to reproduce the issue
-3. The **debug log** - scroll down to the Debug section at the bottom of the right sidebar, click **Copy Log**, and paste it into the issue
-
----
-
-Made with &#9829; by [eggricesoy](https://eggrice.soy) · [@eggricesoy](https://x.com/eggricesoy)
+Richiede un browser Chromium (Chrome, Edge, Brave) per WebUSB.

@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "REGGIE'S SUPERIA",
+  "values": {
+    "filmSimulation": 17,
+    "dynamicRange": 0,
+    "grainEffect": 259,
+    "smoothSkin": 0,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 2,
+    "whiteBalance": 2,
+    "wbShiftR": 1,
+    "wbShiftB": -3,
+    "wbColorTemp": 6500,
+    "highlightTone": -2,
+    "shadowTone": -1,
+    "color": 1,
+    "sharpness": -2,
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Neg.",
+    "whiteBalance": "Auto",
+    "dynamicRange": "Auto",
+    "grainEffect": "Strong Large",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Strong",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

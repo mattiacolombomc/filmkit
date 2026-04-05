@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "REGGIE'S BW",
+  "values": {
+    "filmSimulation": 14,
+    "dynamicRange": 0,
+    "grainEffect": 3,
+    "smoothSkin": 0,
+    "colorChrome": 0,
+    "colorChromeFxBlue": 0,
+    "whiteBalance": 2,
+    "wbShiftR": 0,
+    "wbShiftB": 0,
+    "wbColorTemp": 6700,
+    "highlightTone": 2,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": -1,
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Acros + Red",
+    "whiteBalance": "Auto",
+    "dynamicRange": "Auto",
+    "grainEffect": "Strong Small",
+    "colorChrome": "Off",
+    "colorChromeFxBlue": "Off",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

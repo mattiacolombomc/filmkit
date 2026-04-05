@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "PORTRA400",
+  "values": {
+    "filmSimulation": 11,
+    "dynamicRange": 3,
+    "grainEffect": 3,
+    "smoothSkin": 0,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 0,
+    "whiteBalance": 32775,
+    "wbShiftR": 1,
+    "wbShiftB": -6,
+    "wbColorTemp": 5200,
+    "highlightTone": 0,
+    "shadowTone": -2,
+    "color": 2,
+    "sharpness": -2,
+    "noiseReduction": -4,
+    "clarity": -2,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Chrome",
+    "whiteBalance": "Color Temperature",
+    "dynamicRange": "DR 400%",
+    "grainEffect": "Strong Small",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Off",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

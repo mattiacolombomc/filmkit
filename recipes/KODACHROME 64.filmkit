@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "KODACHROME 64",
+  "values": {
+    "filmSimulation": 11,
+    "dynamicRange": 2,
+    "grainEffect": 2,
+    "smoothSkin": 0,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 1,
+    "whiteBalance": 4,
+    "wbShiftR": 2,
+    "wbShiftB": -5,
+    "wbColorTemp": 6500,
+    "highlightTone": 0,
+    "shadowTone": 0,
+    "color": 2,
+    "sharpness": 1,
+    "noiseReduction": -4,
+    "clarity": 3,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Chrome",
+    "whiteBalance": "Daylight",
+    "dynamicRange": "DR 200%",
+    "grainEffect": "Weak Small",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

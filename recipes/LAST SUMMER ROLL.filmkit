@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "LAST SUMMER ROLL",
+  "values": {
+    "filmSimulation": 17,
+    "dynamicRange": 3,
+    "grainEffect": 2,
+    "smoothSkin": 1,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 1,
+    "whiteBalance": 2,
+    "wbShiftR": 3,
+    "wbShiftB": -5,
+    "wbColorTemp": 6700,
+    "highlightTone": -2,
+    "shadowTone": 0.5,
+    "color": 4,
+    "sharpness": 0,
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Neg.",
+    "whiteBalance": "Auto",
+    "dynamicRange": "DR 400%",
+    "grainEffect": "Weak Small",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "smoothSkin": "Weak",
+    "dRangePriority": "Off"
+  }
+}

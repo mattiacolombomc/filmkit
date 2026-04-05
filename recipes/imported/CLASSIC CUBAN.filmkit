@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "CLASSIC CUBAN",
+  "values": {
+    "filmSimulation": 11,
+    "dynamicRange": 0,
+    "grainEffect": 259,
+    "smoothSkin": 0,
+    "colorChrome": 1,
+    "colorChromeFxBlue": 1,
+    "whiteBalance": 2,
+    "wbShiftR": 1,
+    "wbShiftB": -5,
+    "wbColorTemp": 5200,
+    "highlightTone": 1,
+    "shadowTone": 1,
+    "color": 4,
+    "sharpness": 0,
+    "noiseReduction": -4,
+    "clarity": 3,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Chrome",
+    "whiteBalance": "Auto",
+    "dynamicRange": "Auto",
+    "grainEffect": "Strong Large",
+    "colorChrome": "Weak",
+    "colorChromeFxBlue": "Weak",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "CINESTILL 800T",
+  "values": {
+    "filmSimulation": 16,
+    "dynamicRange": 1,
+    "grainEffect": 259,
+    "smoothSkin": 0,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 1,
+    "whiteBalance": 32771,
+    "wbShiftR": -6,
+    "wbShiftB": -4,
+    "wbColorTemp": 10000,
+    "highlightTone": 0,
+    "shadowTone": 2,
+    "color": 4,
+    "sharpness": -3,
+    "noiseReduction": -4,
+    "clarity": -5,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Eterna (Cinema)",
+    "whiteBalance": "Fluorescent 3",
+    "dynamicRange": "DR 100%",
+    "grainEffect": "Strong Large",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

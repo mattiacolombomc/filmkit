@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "REGGIE'S PORTRA",
+  "values": {
+    "filmSimulation": 11,
+    "dynamicRange": 0,
+    "grainEffect": 2,
+    "smoothSkin": 0,
+    "colorChrome": 2,
+    "colorChromeFxBlue": 1,
+    "whiteBalance": 2,
+    "wbShiftR": 2,
+    "wbShiftB": -4,
+    "wbColorTemp": 6500,
+    "highlightTone": -1,
+    "shadowTone": -1,
+    "color": 2,
+    "sharpness": -2,
+    "noiseReduction": -4,
+    "clarity": 0,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Chrome",
+    "whiteBalance": "Auto",
+    "dynamicRange": "Auto",
+    "grainEffect": "Weak Small",
+    "colorChrome": "Strong",
+    "colorChromeFxBlue": "Weak",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}

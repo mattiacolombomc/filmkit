@@ -1,0 +1,36 @@
+{
+  "filmkit": 1,
+  "name": "BRIGHTKODAK",
+  "values": {
+    "filmSimulation": 11,
+    "dynamicRange": 3,
+    "grainEffect": 259,
+    "smoothSkin": 0,
+    "colorChrome": 0,
+    "colorChromeFxBlue": 0,
+    "whiteBalance": 4,
+    "wbShiftR": 3,
+    "wbShiftB": -7,
+    "wbColorTemp": 6700,
+    "highlightTone": -2,
+    "shadowTone": -2,
+    "color": 4,
+    "sharpness": -2,
+    "noiseReduction": -4,
+    "clarity": -3,
+    "exposure": 0,
+    "dRangePriority": 0,
+    "monoWC": 0,
+    "monoMG": 0
+  },
+  "_labels": {
+    "filmSimulation": "Classic Chrome",
+    "whiteBalance": "Daylight",
+    "dynamicRange": "DR 400%",
+    "grainEffect": "Strong Large",
+    "colorChrome": "Off",
+    "colorChromeFxBlue": "Off",
+    "smoothSkin": "Off",
+    "dRangePriority": "Off"
+  }
+}
