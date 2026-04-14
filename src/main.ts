@@ -850,6 +850,13 @@ function makePresetActions(): HTMLElement {
     linkBtn.addEventListener('click', (ev) => { ev.stopPropagation(); dropdown.remove(); copyShareLink() })
     dropdown.appendChild(linkBtn)
 
+    if (store.slotCount > 0) {
+      const allBtn = document.createElement('button')
+      allBtn.textContent = 'Export All (Camera)'
+      allBtn.addEventListener('click', (ev) => { ev.stopPropagation(); dropdown.remove(); exportAllCameraPresets() })
+      dropdown.appendChild(allBtn)
+    }
+
     exportAnchor.appendChild(dropdown)
 
     const dismiss = (ev: MouseEvent) => {
@@ -1099,6 +1106,52 @@ function exportPreset() {
   URL.revokeObjectURL(url)
 }
 
+/** Export all camera presets as individual .filmkit files. */
+function exportAllCameraPresets() {
+  if (store.slotCount === 0) return
+  let count = 0
+
+  for (let i = 0; i < store.slotCount; i++) {
+    const pid = store.slotMap[i]
+    if (!pid) continue
+
+    const wc = workingCopies.get(pid)
+    const preset = store.presets.get(pid)
+    const name = wc?.name ?? preset?.name ?? `C${i + 1}`
+    const values = wc?.values ?? preset?.values
+    if (!values) continue
+
+    const data = {
+      filmkit: 1,
+      name,
+      values: { ...values },
+      _labels: {
+        filmSimulation: FilmSimLabels[values.filmSimulation] ?? 'Unknown',
+        whiteBalance: WBModeLabels[values.whiteBalance] ?? 'Unknown',
+        dynamicRange: DynRangeLabels[values.dynamicRange] ?? 'Auto',
+        grainEffect: grainLabel(values.grainEffect),
+        colorChrome: ColorChromeLabels[values.colorChrome] ?? 'Unknown',
+        colorChromeFxBlue: ColorChromeFxBlueLabels[values.colorChromeFxBlue] ?? 'Unknown',
+        smoothSkin: SmoothSkinLabels[values.smoothSkin] ?? 'Unknown',
+        dRangePriority: DRangePriorityLabels[values.dRangePriority] ?? 'Unknown',
+      },
+    }
+
+    const json = JSON.stringify(data, null, 2)
+    const blob = new Blob([json], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    const safeName = name.replace(/[^a-zA-Z0-9_\- ]/g, '').trim() || `C${i + 1}`
+    a.download = `C${i + 1}-${safeName}.filmkit`
+    a.click()
+    URL.revokeObjectURL(url)
+    count++
+  }
+
+  log(`Exported ${count} camera preset${count !== 1 ? 's' : ''}`)
+}
+
 /** Copy a shareable link for the active preset to clipboard. */
 function copyShareLink() {
   if (!activeId) return
@@ -1145,27 +1198,45 @@ function importFromJSON(data: unknown, fallbackName: string): { name: string } |
   return { name }
 }
 
-/** Import a .filmkit or .json file as a new local preset. */
+/** Import one or more .filmkit / .json files as local presets. */
 async function importFromFile() {
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = '.filmkit,.json'
+  input.multiple = true
 
   input.addEventListener('change', async () => {
-    const file = input.files?.[0]
-    if (!file) return
+    const files = input.files
+    if (!files || files.length === 0) return
 
-    try {
-      const text = await file.text()
-      const data = JSON.parse(text)
-      const result = importFromJSON(data, file.name.replace(/\.(filmkit|json)$/i, ''))
-      if ('error' in result) {
-        await showDialog('Import Error', result.error, [{ label: 'OK', primary: true }])
-      } else {
-        await showDialog('Preset Imported', `"${result.name}" has been added to your local presets.`, [{ label: 'OK', primary: true }])
+    const imported: string[] = []
+    const errors: string[] = []
+
+    for (const file of files) {
+      try {
+        const text = await file.text()
+        const data = JSON.parse(text)
+        const result = importFromJSON(data, file.name.replace(/\.(filmkit|json)$/i, ''))
+        if ('error' in result) {
+          errors.push(`${file.name}: ${result.error}`)
+        } else {
+          imported.push(result.name)
+        }
+      } catch {
+        errors.push(`${file.name}: Failed to parse.`)
       }
-    } catch {
-      await showDialog('Import Error', 'Failed to parse file. Expected a .filmkit or .json preset file.', [{ label: 'OK', primary: true }])
+    }
+
+    if (imported.length > 0 && errors.length === 0) {
+      await showDialog('Presets Imported',
+        `${imported.length} preset${imported.length > 1 ? 's' : ''} imported: ${imported.map(n => `"${n}"`).join(', ')}`,
+        [{ label: 'OK', primary: true }])
+    } else if (imported.length > 0) {
+      await showDialog('Import Partial',
+        `Imported ${imported.length}: ${imported.map(n => `"${n}"`).join(', ')}\n\nFailed ${errors.length}:\n${errors.join('\n')}`,
+        [{ label: 'OK', primary: true }])
+    } else {
+      await showDialog('Import Error', errors.join('\n'), [{ label: 'OK', primary: true }])
     }
   })
 
